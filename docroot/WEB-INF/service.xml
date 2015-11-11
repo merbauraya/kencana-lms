@@ -1,0 +1,785 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
+<service-builder package-path="com.kencana.lms" auto-namespace-tables="true">
+	<author>Mazlan Mat</author>
+	<namespace>Kencana</namespace>
+	
+	
+	<entity name="MarcTag" local-service="true">
+		<column name="tagId" type="long" primary="true"></column>
+		<column name="tag" type="String"></column>
+		<column name="description" type="String"></column>
+		<column name="helpText" type="String"></column>
+		<column name="repetable" type="boolean"></column>
+		<column name="defaultValue" type="String"></column>
+		<column name="indicator1" type="boolean"></column>
+		<column name="indicator2" type="boolean"></column>
+		<column name="tagType" type="String"></column>
+		
+		<!--  order -->
+		<order by="asc">
+			<order-column name="tag" case-sensitive="false" />
+		</order>
+		
+		<finder name="TagTagType" return-type="MarcTag" unique="true">
+			<finder-column name="tag" />
+			<finder-column name="tagType" />
+		</finder>
+		<finder name="TagType" return-type="Collection">
+			
+			<finder-column name="tagType" />
+		</finder>
+		
+	</entity>
+	<entity name="MarcSubfield" local-service="true">
+		<column name="MarcSubfieldId" type="long" primary="true"/>
+		<column name="tag" type="String"></column>
+		<column name="tagType" type="String"></column>
+		<column name="subfield" type="String"></column>
+		<column name="description" type="String"></column>
+		<column name="repetable" type="boolean"></column>
+		<column name="mandatory" type="boolean"></column>
+		<column name="authorisedValue" type="String"></column>
+		<column name="authTypeCode" type="String"></column>
+		<column name="isURL" type="boolean"></column>
+		<column name="helpText" type="String"></column>
+		
+		<!--  order -->
+		<order by="asc">
+			<order-column name="tag" case-sensitive="false" />
+		</order>
+		
+		<!-- finder -->
+		<finder name="Subfield" return-type="MarcSubfield" unique="true">
+			<finder-column name="tag" />
+			<finder-column name="tagType" />
+			<finder-column name="subfield" />
+		</finder>
+		
+		
+		
+	</entity>
+	<entity name="ReasonCode" local-service="true">
+		<column name="reasonCodeId" type="long" primary="true"></column>
+		<column name="reasonCodeName" type="String"></column>
+		<column name="groupId" type="long"/>
+		<column name="companyId" type="long"/>
+		<finder return-type="Collection" name="GroupCompany">
+			<finder-column name="companyId"></finder-column>
+			<finder-column name="groupId"></finder-column>
+		</finder>
+		<finder return-type="Collection" name="Group">
+			<finder-column name="groupId"></finder-column>
+		</finder>
+	</entity>
+	<entity name="ItemType" local-service="true">
+		<column name="itemTypeId" type="long" primary="true"></column>
+		<column name="itemTypeName" type="String"/>
+		<column name="notForLoan" type="boolean"/>
+		
+		<column name="coverId" type="long" />
+		<column name="checkoutMessage" type="String"/>
+		<column name="checkinMessage" type="String"/>
+		<column name="rentalRate" type="Double"></column>
+		
+		<column name="companyId" type="long"></column>
+		<column name="groupId" type="long"></column>
+		<column name="userId" type="long"></column>
+		<column name="createDate" type="Date"></column>
+		
+		<finder return-type="Collection" name="CompanyGroup">
+			<finder-column name="companyId"></finder-column>
+			<finder-column name="groupId"></finder-column>
+		</finder>
+		
+	</entity>
+	
+	<entity name="Catalog" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="catalogId" type="long" primary="true" />
+
+		
+		
+		
+		
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="groupId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createdByUserId" type="long"/>
+		
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+		
+		<column name="itemTypeId" type="long" />
+		<column name="title" type="String" />
+		<column name="author" type="String"></column>
+		<column name="publisher" type="String"/>
+		<column name="isbn" type="String" />
+		<column name="issn" type="String"></column>
+		<column name="callNumber" type="String"></column>
+		<column name="UUID" type="String"></column>
+		
+		
+		<column name="catalogAbstract" type="String" />
+		<column name="templateId" type="long" />
+		
+		<column name="visible" type="boolean" />
+		<column name="coverImageId" type="long" />
+		<column name="marc" type="String" />
+		<column name="workflowStatus" type="int"/>
+		
+
+		<!-- Finder methods -->
+
+		<finder name="TemplateId" return-type="Collection">
+			<finder-column name="templateId" />
+		</finder>
+		<finder name="ItemType" return-type="Collection">
+			<finder-column name="itemTypeId"/>
+		</finder>
+		
+		<finder name="GroupCompany" return-type="Collection">
+			<finder-column name="groupId"/>
+			<finder-column name="companyId"/>
+		</finder>
+		<finder name="Company" return-type="Collection">
+			
+			<finder-column name="companyId"/>
+		</finder>
+		<finder name="Group" return-type="Collection">
+			<finder-column name="groupId"/>
+		</finder>
+		<finder name="GroupStatus" return-type="Collection">
+			<finder-column name="groupId"/>
+			<finder-column name="workflowStatus"/>
+		</finder>
+		
+	</entity>
+	<entity name="Location" local-service="true">
+		<column name="locationId" type="long" primary="true"></column>
+		<column name="libraryId" type="long"></column>
+		<column name="companyId" type="long"></column>
+		<column name="groupId" type="long"></column>
+		<column name="locationName" type="String"></column>
+		
+		<finder name="Library" return-type="Collection">
+			<finder-column name="libraryId"></finder-column>
+		</finder>
+		<finder return-type="Collection" name="CompanyGroup">
+			<finder-column name="companyId"></finder-column>
+			<finder-column name="groupId"></finder-column>
+		</finder>	
+	</entity>
+	<entity name="ItemCategory" local-service="true">
+		<column name="itemCategoryId" type="long" primary="true"></column>
+		<column name="itemCategoryName" type="String"></column>
+		<column name="groupId" type="long"></column>
+		<column name="companyId" type="long"></column>
+		<column name="createDate" type="Date"></column>
+		<column name="userId" type="long"></column>
+		<column name="modifiedDate" type="Date"></column>
+		<finder return-type="Collection" name="GroupCompany">
+			<finder-column name="companyId"></finder-column>
+			<finder-column name="groupId"></finder-column>
+		</finder>
+		<finder return-type="Collection" name="Group">
+			<finder-column name="groupId"></finder-column>
+		</finder>
+	</entity>
+	<entity name="CatalogItem" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="catalogItemId" type="long" primary="true" />
+		<column name="catalogId" type="long" />
+		<column name="catalogTitle" type="String"></column>
+		
+	
+		
+		
+		
+		
+		
+		<!-- identification  -->
+		<column name="callNumber" type="String" />
+		<column name="holdingLibraryId" type="long"/>
+		<column name="currentLibraryId" type="long" />
+		<column name="barcode" type="String"/>
+		<column name="copyNumber" type="int"/>
+		<column name="locationId" type="long"/>
+		<column name="itemCategoryId" type="long"/>
+		<column name="itemTypeId" type="long"></column>
+			<!--  holding library -->
+		
+		
+		
+		<!--  status -->
+		<column name="withdrawnStatus" type="boolean" />
+		<column name="lostStatus" type="boolean" />
+		<column name="damageStatus" type="boolean" />
+		<column name="notForLoanStatus" type="boolean"/>
+		
+		<!--  date -->
+		
+		<column name="lastSeenDate" type="Date" />
+		
+		<column name="withdrawnDate" type="Date" />
+		<column name="lostDate" type="Date" />
+		
+		
+		
+		<!--  circulation -->
+		<column name="lastCheckOutDate" type="Date" />
+		<column name="circulationCount" type="int" />
+		<column name="renewalCount" type="int" />
+		<column name="reservedCount" type="int" />
+		<column name="checkedOutDate" type="Date" />
+		<column name="reservedBy" type="long"/>
+		<column name="claimCount" type="Double"/>
+		<column name="dueDate" type="Date"/>
+		<column name="checkOutBy" type="long"></column>
+		<column name="released" type="boolean"></column>
+		<column name="releaseDate" type="Date"></column>
+		<column name="releaseByUserId" type="long"></column>
+		<!--  acquisition -->
+		<column name="vendorId" type="long"/>
+		<column name="invoiceId" type="long"/>
+		<column name="purchasePrice" type="double" />
+		<column name="replacementPrice" type="double" />
+		<column name="currencyId" type="long"/>
+		<column name="localPurchasePrice" type="double"/>
+		
+		<!--  opac -->
+		
+		<column name="publicNote" type="String" />
+		
+		
+		
+		<!--  administration -->
+		<column name="privateNote" type="String" />
+	
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="groupId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+		<column name="acquiredDate" type="Date" />
+		<column name="workflowStatus" type="int"></column>
+		
+		
+
+		<!-- Finder methods -->
+	
+		<finder name="Catalog" return-type="Collection">
+			<finder-column name="catalogId" />
+		</finder>
+		
+		<finder return-type="CatalogItem" name="Barcode"  unique="true">
+			<finder-column name="companyId"></finder-column>
+			<finder-column name="barcode"></finder-column>
+		</finder>
+		
+		<finder name="HoldingLibrary" return-type="Collection">
+			<finder-column name="holdingLibraryId"/>
+		</finder>
+		<finder name="ReleasedCompanyGroup" return-type="Collection">
+			<finder-column name="companyId"></finder-column>
+			<finder-column name="groupId"></finder-column>
+			<finder-column name="released"></finder-column>
+		</finder>
+		<finder name="WithdrawnCompanyGroup" return-type="Collection">
+			<finder-column name="companyId"></finder-column>
+			<finder-column name="groupId"></finder-column>
+			<finder-column name="withdrawnStatus"></finder-column>
+		</finder>
+		<finder name="CompanyGroup" return-type="Collection">
+			<finder-column name="companyId"></finder-column>
+			<finder-column name="groupId"></finder-column>
+		</finder>
+	</entity>
+	<entity name="Library" local-service="true">
+		<!-- PK fields -->
+
+		<column name="libraryId" type="long" primary="true" />
+		<column name="libraryName" type="String" />
+		
+		<!-- Group instance -->
+		<column name="groupId" type="long" />
+		
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		
+		
+		<column name="address1" type="String" />
+		<column name="address2" type="String" />
+		<column name="address3" type="String" />
+		<column name="zipcode" type="String" />
+		<column name="city" type="String" />
+		
+		<column name="state" type="String" />
+		<column name="country" type="String" />
+		
+		<column name="phone" type="String" />
+		<column name="email" type="String" />
+		<column name="website" type="String" />
+		<column name="notes" type="String" />
+		
+		<finder name="CompanyGroup" return-type="Collection">
+			<finder-column name="companyId"/>
+			<finder-column name="groupId"/>
+		</finder>
+		<finder name="Company" return-type="Collection">
+			<finder-column name="companyId"/>
+		</finder>
+	</entity>
+	<entity name="CatalogTemplate" local-service="true">
+		<column name="templateId" type="long" primary="true"></column>
+		<column name="templateName" type="String"/>
+		
+		<!-- Group instance -->
+		<column name="groupId" type="long" />
+		
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		
+		<column name="description" type="String"/>
+		<column name="active" type="boolean"/>
+		
+		<column name="createBy" type="long"/>
+		<column name="createdDate" type="Date" />
+	</entity>
+	
+	<entity name="CatalogTemplateTag" local-service="true">
+		<column name="catelogTemplateTagId" type="long" primary="true"/>
+		<column name="catelogTemplateId" type="long"/>
+		
+		<!-- Group instance -->
+		<column name="groupId" type="long" />
+		
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		
+		
+		<column name="tag" type="String"></column>
+		<column name="repeatable" type="boolean"/>
+		<column name="mandatory" type="boolean"/>
+		<column name="helpText" type="String"/>
+		
+		<!--  order -->
+		<order by="asc">
+			<order-column name="tag" case-sensitive="false" />
+		</order>
+		
+		<!-- Finder methods -->
+
+		<finder name="Template" return-type="Collection">
+			<finder-column name="catelogTemplateId" />
+		</finder>
+	
+	</entity>
+	
+	<entity name="CatalogTemplateSubfield" local-service="true">
+		<column name="catalogTemplateSubfieldId" type="long" primary="true"></column>
+		<column name="catalogTemplateTagId" type="long"></column>
+		<column name="subfield" type="String"></column>
+		
+		<!-- Group instance -->
+		<column name="groupId" type="long" />
+		
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		
+		
+		<column name="repeatable" type="boolean"></column>
+		<column name="mandatory" type="boolean"></column>
+		<column name="isURL" type="boolean"></column>
+		
+		<!--  order --> 
+		<order by="asc">
+			<order-column name="subfield" case-sensitive="false" />
+		</order>
+		
+		<!-- Finder methods -->
+
+		<finder name="Tag" return-type="Collection">
+			<finder-column name="catalogTemplateTagId" />
+		</finder>
+	</entity>
+	
+	<entity name="MarcBatchUpload" local-service="true">
+		<column name="marcBatchUploadId" type="long" primary="true"></column>
+		
+		<!-- Group instance -->
+		<column name="groupId" type="long" />
+		
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="createBy" type="long"/>
+		<column name="createdDate" type="Date" />
+		<column name="processed" type="boolean" />
+		<column name="importDate" type="Date"></column>
+		<column name="importByUserId" type="long"></column>
+		<column name="partialImport" type="boolean"></column>
+		<column name="fileCount" type="int"/>
+		<column name="description" type="String"/>
+		<column name="recordCount" type="int"/>
+		<finder name="CompanyGroup" return-type="Collection">
+			<finder-column name="companyId" />
+			<finder-column name="groupId" />
+		</finder>
+		<finder name="Group" return-type="Collection">
+			
+			<finder-column name="groupId" />
+		</finder>
+		<finder name="Status" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="companyId" />
+			<finder-column name="processed" />
+		</finder>
+	</entity>
+	<entity name="MarcBatchUploadItem" local-service="true">
+		<column name="marcBatchUploadItemId" type="long" primary="true"></column>
+		
+		<column name="marcBatchUploadId" type="long"/>
+		<!-- Group instance -->
+		<column name="groupId" type="long" />
+		
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="createdBy" type="long"/>
+		
+		<column name="createdDate" type="Date" />
+		<column name="processed" type="boolean" />
+		<column name="importDate" type="Date"></column>
+		<column name="importByUserId" type="long"></column>
+		
+		<column name="marcContent" type="String"/>
+		<column name="fileName" type="String"/>
+		<column name="fileEntryId" type="long"/>
+		<!-- Finder methods -->
+
+		<finder name="BatchId" return-type="Collection">
+			<finder-column name="marcBatchUploadId" />
+		</finder>
+		<finder name="BatchStatus" return-type="Collection">
+			<finder-column name="marcBatchUploadId"/>
+			<finder-column name="processed"></finder-column>
+		</finder>
+	</entity>
+	
+	
+	<!--  end cataloging -->
+	<!--  patron -->
+	<entity name="Patron" local-service="true">
+		<column name="patronId" type="long" primary="true"/><!--  same as userId -->
+		<column name="cardNumber" type="String" />
+		
+		<!-- identification -->
+		<column name="userId" type="long"/>
+		<column name="groupId" type="long" />
+		<column name="companyId" type="long" />
+		
+		
+		<column name="libraryId" type="long"/>
+		<column name="expiryDate" type="Date" />
+		<column name="patronCategoryId" type="long"/>
+		<column name="patronStatusId" type="long"></column>
+		<column name="patronNote" type="String"></column>
+		<finder name="UserId" return-type="Patron">
+			<finder-column name="userId"/>
+		</finder>
+		<finder name="LibraryId" return-type="Collection">
+			<finder-column name="companyId"></finder-column>
+			<finder-column name="libraryId"/>
+		</finder>
+		<finder name="CardNumber" return-type="Patron" unique="true">
+			<finder-column name="cardNumber"/>
+		</finder>
+		<finder return-type="Collection" name="C_G_Status">
+			<finder-column name="companyId"></finder-column>
+			<finder-column name="groupId"></finder-column>
+			<finder-column name="patronStatusId"></finder-column>
+		</finder>
+		<finder return-type="Collection" name="C_G_Category">
+			<finder-column name="companyId"></finder-column>
+			<finder-column name="groupId"></finder-column>
+			<finder-column name="patronCategoryId"></finder-column>
+		</finder>
+	</entity>
+	<entity name="PatronCategory" local-service="true">
+		<column name="patronCategoryId" type="long" primary="true"/>
+		<column name="patronCategoryName" type="String"/>
+		<column name="notes" type="String"/>
+		<column name="groupId" type="long"/>
+		<column name="companyId" type="long"/>
+		<finder name="CompanyGroup" return-type="Collection">
+			<finder-column name="companyId"/>
+			<finder-column name="groupId"/>
+		</finder>
+		<finder name="Company" return-type="Collection">
+			<finder-column name="companyId"/>
+		
+		</finder>
+		<finder name="group" return-type="Collection">
+			<finder-column name="groupId"/>
+		
+		</finder>
+	</entity>
+	<entity name="PatronStatus" local-service="true">
+		<column name="patronStatusId" type="long" primary="true"></column>
+		<column name="patronStatusName" type="String"></column>
+		<column name="noLogin" type="boolean"></column>
+		<column name="noCheckout" type="boolean"></column>
+		<column name="noReserve" type="boolean"></column>
+		<column name="noRenew" type="boolean"></column>
+		<column name="color" type="int"></column>
+		<column name="groupId" type="long"/>
+		<column name="companyId" type="long"/>
+		<finder name="CompanyGroup" return-type="Collection">
+			<finder-column name="companyId"/>
+			<finder-column name="groupId"/>
+		</finder>
+		<finder name="Company" return-type="Collection">
+			<finder-column name="companyId"/>
+		
+		</finder>
+		<finder name="Group" return-type="Collection">
+			<finder-column name="groupId"/>
+		
+		</finder>
+	</entity>
+	
+	<entity name="CirculationRule" local-service="true">
+		<column name="circulationRuleId" type="long" primary="true"></column>
+		<column name="libraryId" type="long"></column>
+		
+		<column name="companyId" type="long"></column>
+		<column name="groupId" type="long"></column>
+		
+		
+		<column name="patronCategoryId" type="long"></column>
+		<column name="itemTypeId" type="long"></column>
+		<column name="itemCategoryId" type="long"></column>
+		
+		<!--  rules -->
+		<column name="maxCheckoutAllowed" type="int"></column>
+		<column name="renewalCountAllowed" type="int"></column>
+		<column name="reservedCountAllowed" type="int"></column>
+		
+		<column name="periodUnit" type="int"></column>
+		<column name="loanPeriod" type="int"></column>
+		<column name="loanPeriodIfReserved" type="int"></column>
+		<column name="rentalCharge" type="double"></column>
+		<column name="finePerPeriod" type="double"></column>
+		<column name="fineGracePeriod" type="int"></column>
+		<column name="maxFineAmount" type="double"></column>
+		
+		<column name="userId" type="long"></column>
+		<column name="createdDate" type="Date"></column>
+		
+		<finder name="Company" return-type="Collection">
+			<finder-column name="companyId"/>
+			
+		</finder>
+		<finder name="CompanyGroup" return-type="Collection">
+			<finder-column name="companyId"/>
+			<finder-column name="groupId"/>
+		</finder>
+		<finder name="ItemType" return-type="Collection">
+			<finder-column name="companyId"/>
+			<finder-column name="libraryId"></finder-column>
+			<finder-column name="itemTypeId"/>
+			
+		</finder>
+		<finder name="PatronCategory" return-type="Collection">
+			<finder-column name="companyId"/>
+			<finder-column name="libraryId"></finder-column>
+			<finder-column name="patronCategoryId"/>
+			
+		</finder>
+		<finder name="ItemTypePatronCategory" return-type="Collection">
+			<finder-column name="companyId"/>
+			<finder-column name="libraryId"></finder-column>
+			<finder-column name="patronCategoryId"/>
+			<finder-column name="itemTypeId"/>
+		</finder>
+		<finder return-type="CategoryTypePatronCategory_C" name="CirculationRule" unique="true">
+			<finder-column name="companyId"></finder-column>
+			<finder-column name="patronCategoryId"/>
+			<finder-column name="itemTypeId"/>
+			<finder-column name="itemCategoryId"/>
+		</finder>
+		
+	</entity>
+	<!-- Circulation -->
+	<entity name="CirculationTrans" local-service="true">
+		<column name="transId" type="long" primary="true"></column>
+		
+		<column name="companyId" type="long"></column>
+		<column name="groupId" type="long"></column>
+		<column name="libraryId" type="long"></column>
+		
+		<column name="patronId" type="long"></column>
+		<column name="catalogItemId" type="long"></column>
+		<column name="transDate" type="Date"></column>
+		<column name="dueDate" type="Date"></column>
+		<column name="overdue" type="boolean"></column>
+		<column name="returnDate" type="Date"></column>
+		<column name="lastRenewDate" type="Date"></column>
+		<column name="renewCount" type="int"></column>
+		
+		<finder return-type="Collection" name="PatronId">
+			<finder-column name="patronId"></finder-column>
+		</finder>
+		
+		<finder return-type="Collection" name="CompanyGroup">
+			<finder-column name="companyId"></finder-column>
+			<finder-column name="groupId"></finder-column>
+		
+		</finder>
+		<finder return-type="Collection" name="CompanyGroupLibrary">
+			<finder-column name="companyId"></finder-column>
+			<finder-column name="groupId"></finder-column>
+			<finder-column name="libraryId"></finder-column>
+		</finder>
+		
+		<finder return-type="Collection" name="Patron">
+			<finder-column name="companyId"></finder-column>
+			<finder-column name="patronId"></finder-column>
+		
+		</finder>
+		<finder return-type="CirculationTrans" name="CatalogItem" unique="true">
+			<finder-column name="companyId"></finder-column>
+			<finder-column name="catalogItemId"></finder-column>
+		
+		</finder>
+		
+		<finder return-type="Collection" name="OverdueLibrary">
+			<finder-column name="companyId"></finder-column>
+			<finder-column name="libraryId"></finder-column>
+			<finder-column name="overdue"></finder-column>
+		</finder>
+	</entity>
+	
+	<entity name="CircTransHistory" local-service="true">
+		<column name="transId" type="long" primary="true"></column>
+		
+		<column name="companyId" type="long"></column>
+		<column name="groupId" type="long"></column>
+		<column name="libraryId" type="long"></column>
+		
+		<column name="patronId" type="long"></column>
+		<column name="catalogItemId" type="long"></column>
+		<column name="transDate" type="Date"></column>
+		<column name="dueDate" type="Date"></column>
+		<column name="overdue" type="boolean"></column>
+		<column name="returnDate" type="Date"></column>
+		<column name="lastRenewDate" type="Date"></column>
+		<column name="renewCount" type="int"></column>
+		<column name="fineAmount" type="Double"></column>
+		
+		<finder return-type="Collection" name="CompanyGroup">
+			<finder-column name="companyId"></finder-column>
+			<finder-column name="groupId"></finder-column>
+		
+		</finder>
+		<finder return-type="Collection" name="CompanyGroupLibrary">
+			<finder-column name="companyId"></finder-column>
+			<finder-column name="groupId"></finder-column>
+			<finder-column name="libraryId"></finder-column>
+		</finder>
+		
+		<finder return-type="Collection" name="Patron">
+			<finder-column name="companyId"></finder-column>
+			<finder-column name="patronId"></finder-column>
+		
+		</finder>
+		<finder return-type="Collection" name="CatalogItem">
+			<finder-column name="companyId"></finder-column>
+			<finder-column name="catalogItemId"></finder-column>
+		
+		</finder>
+		
+	</entity>
+	
+	
+	<!--  end Circulation -->
+	
+	
+	<!--  Acquisition -->
+	<entity name="Vendor" local-service="true">
+		<column name="vendorId" type="long" primary="true"></column>
+		<column name="vendorCode" type="String"></column>
+		<column name="vendorName" type="String"></column>
+		<column name="email" type="String"></column>
+		<column name="url" type="String"></column>
+		
+		
+		<column name="companyId" type="long"></column>
+		<column name="groupId" type="long"></column>
+		
+		<!-- contact info -->	
+		<column name="address1" type="String"></column>
+		<column name="address2" type="String"></column>
+		<column name="address3" type="String"></column>
+		<column name="city" type="String"></column>
+		<column name="zipcode" type="String"></column>
+		<column name="contactPerson" type="String"></column>
+		<column name="phone" type="String"></column>
+		<column name="fax" type="String"></column>
+		
+		
+		<column name="isPublisher" type="boolean"></column>
+		<column name="isBinder" type="boolean"></column>
+		<column name="isActive" type="boolean"></column>
+		<column name="rating" type="String"></column>
+		
+		<column name="bankName" type="String"></column>
+		<column name="bankAccount" type="String"></column>
+		
+		<column name="lastOrderDate" type="Date"></column>
+		<column name="note" type="String"></column>
+		
+		<finder return-type="Collection" name="Company">
+			<finder-column name="companyId"></finder-column>
+		
+		</finder>
+		<finder return-type="Collection" name="C_VendorName">
+			<finder-column name="companyId"></finder-column>
+			<finder-column name="vendorName" comparator="LIKE"></finder-column>
+		
+		</finder>
+		
+	</entity>
+	
+	
+	<!-- End Acquisition -->
+	
+	<exceptions>
+		<exception>ExpiryDate</exception>
+		<exception>DueDate</exception>
+	</exceptions>
+</service-builder>

@@ -1,0 +1,10 @@
+.fullwidth
+{
+	width: 95% !important;
+}
+.block {
+	
+	background: white;
+	margin: 1em 0em;
+	border-top: none;
+}

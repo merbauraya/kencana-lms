@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+ 
+<beans>
+    <bean id="ItemType" class="com.kencana.lms.model.impl.ItemTypeImpl" />
+    <bean id="PatronCategory" class="com.kencana.lms.model.impl.PatronCategoryImpl" />
+    <bean id="Library" class="com.kencana.lms.model.impl.LibraryImpl" />
+    <bean id="PatronStatus" class="com.kencana.lms.model.impl.PatronStatusImpl" />
+    <bean id="ItemCategory" class="com.kencana.lms.model.impl.ItemCategoryImpl" />
+    
+    <bean id="ItemTypeLocalService" class="com.kencana.lms.service.impl.ItemTypeLocalServiceImpl" />
+	<bean id="PatronCategoryLocalService" class="com.kencana.lms.service.impl.PatronCategoryLocalServiceImpl" />
+	<bean id="LibraryLocalService" class="com.kencana.lms.service.impl.LibraryLocalServiceImpl" />
+	<bean id="PatronStatusLocalService" class="com.kencana.lms.service.impl.PatronStatusLocalServiceImpl" />
+	<bean id="ItemCategoryLocalService" class="com.kencana.lms.service.impl.ItemCategoryLocalServiceImpl" />
+	
+</beans>

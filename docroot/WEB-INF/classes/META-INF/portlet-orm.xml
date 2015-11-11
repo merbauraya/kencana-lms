@@ -1,0 +1,618 @@
+<?xml version="1.0"?>
+
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd">
+	<persistence-unit-metadata>
+		<xml-mapping-metadata-complete/>
+		<persistence-unit-defaults>
+			<access>PROPERTY</access>
+		</persistence-unit-defaults>
+	</persistence-unit-metadata>
+	<mapped-superclass class="com.kencana.lms.model.impl.CatalogModelImpl">
+		<attributes>
+			<id name="catalogId" />
+			<basic name="companyId" />
+			<basic name="groupId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createdByUserId" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="itemTypeId" />
+			<basic name="title" />
+			<basic name="author" />
+			<basic name="publisher" />
+			<basic name="isbn" />
+			<basic name="issn" />
+			<basic name="callNumber" />
+			<basic name="UUID" />
+			<basic name="catalogAbstract" />
+			<basic name="templateId" />
+			<basic name="visible" />
+			<basic name="coverImageId" />
+			<basic name="marc" />
+			<basic name="workflowStatus" />
+			<transient name="createdByUserUuid" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.kencana.lms.model.impl.CatalogItemModelImpl">
+		<attributes>
+			<id name="catalogItemId" />
+			<basic name="catalogId" />
+			<basic name="catalogTitle" />
+			<basic name="callNumber" />
+			<basic name="holdingLibraryId" />
+			<basic name="currentLibraryId" />
+			<basic name="barcode" />
+			<basic name="copyNumber" />
+			<basic name="locationId" />
+			<basic name="itemCategoryId" />
+			<basic name="itemTypeId" />
+			<basic name="withdrawnStatus" />
+			<basic name="lostStatus" />
+			<basic name="damageStatus" />
+			<basic name="notForLoanStatus" />
+			<basic name="lastSeenDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="withdrawnDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="lostDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="lastCheckOutDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="circulationCount" />
+			<basic name="renewalCount" />
+			<basic name="reservedCount" />
+			<basic name="checkedOutDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="reservedBy" />
+			<basic name="claimCount" />
+			<basic name="dueDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="checkOutBy" />
+			<basic name="released" />
+			<basic name="releaseDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="releaseByUserId" />
+			<basic name="vendorId" />
+			<basic name="invoiceId" />
+			<basic name="purchasePrice" />
+			<basic name="replacementPrice" />
+			<basic name="currencyId" />
+			<basic name="localPurchasePrice" />
+			<basic name="publicNote" />
+			<basic name="privateNote" />
+			<basic name="companyId" />
+			<basic name="groupId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="acquiredDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="workflowStatus" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="releaseByUserUuid" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.kencana.lms.model.impl.CatalogTemplateModelImpl">
+		<attributes>
+			<id name="templateId" />
+			<basic name="templateName" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="description" />
+			<basic name="active">
+				<column name="ACTIVE_" />
+			</basic>
+			<basic name="createBy" />
+			<basic name="createdDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.kencana.lms.model.impl.CatalogTemplateSubfieldModelImpl">
+		<attributes>
+			<id name="catalogTemplateSubfieldId" />
+			<basic name="catalogTemplateTagId" />
+			<basic name="subfield" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="repeatable" />
+			<basic name="mandatory" />
+			<basic name="isURL" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.kencana.lms.model.impl.CatalogTemplateTagModelImpl">
+		<attributes>
+			<id name="catelogTemplateTagId" />
+			<basic name="catelogTemplateId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="tag" />
+			<basic name="repeatable" />
+			<basic name="mandatory" />
+			<basic name="helpText" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.kencana.lms.model.impl.CircTransHistoryModelImpl">
+		<attributes>
+			<id name="transId" />
+			<basic name="companyId" />
+			<basic name="groupId" />
+			<basic name="libraryId" />
+			<basic name="patronId" />
+			<basic name="catalogItemId" />
+			<basic name="transDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="dueDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="overdue" />
+			<basic name="returnDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="lastRenewDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="renewCount" />
+			<basic name="fineAmount" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.kencana.lms.model.impl.CirculationRuleModelImpl">
+		<attributes>
+			<id name="circulationRuleId" />
+			<basic name="libraryId" />
+			<basic name="companyId" />
+			<basic name="groupId" />
+			<basic name="patronCategoryId" />
+			<basic name="itemTypeId" />
+			<basic name="itemCategoryId" />
+			<basic name="maxCheckoutAllowed" />
+			<basic name="renewalCountAllowed" />
+			<basic name="reservedCountAllowed" />
+			<basic name="periodUnit" />
+			<basic name="loanPeriod" />
+			<basic name="loanPeriodIfReserved" />
+			<basic name="rentalCharge" />
+			<basic name="finePerPeriod" />
+			<basic name="fineGracePeriod" />
+			<basic name="maxFineAmount" />
+			<basic name="userId" />
+			<basic name="createdDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.kencana.lms.model.impl.CirculationTransModelImpl">
+		<attributes>
+			<id name="transId" />
+			<basic name="companyId" />
+			<basic name="groupId" />
+			<basic name="libraryId" />
+			<basic name="patronId" />
+			<basic name="catalogItemId" />
+			<basic name="transDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="dueDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="overdue" />
+			<basic name="returnDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="lastRenewDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="renewCount" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.kencana.lms.model.impl.ItemCategoryModelImpl">
+		<attributes>
+			<id name="itemCategoryId" />
+			<basic name="itemCategoryName" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="userId" />
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.kencana.lms.model.impl.ItemTypeModelImpl">
+		<attributes>
+			<id name="itemTypeId" />
+			<basic name="itemTypeName" />
+			<basic name="notForLoan" />
+			<basic name="coverId" />
+			<basic name="checkoutMessage" />
+			<basic name="checkinMessage" />
+			<basic name="rentalRate" />
+			<basic name="companyId" />
+			<basic name="groupId" />
+			<basic name="userId" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.kencana.lms.model.impl.LibraryModelImpl">
+		<attributes>
+			<id name="libraryId" />
+			<basic name="libraryName" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="address1" />
+			<basic name="address2" />
+			<basic name="address3" />
+			<basic name="zipcode" />
+			<basic name="city" />
+			<basic name="state">
+				<column name="STATE_" />
+			</basic>
+			<basic name="country" />
+			<basic name="phone" />
+			<basic name="email" />
+			<basic name="website" />
+			<basic name="notes" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.kencana.lms.model.impl.LocationModelImpl">
+		<attributes>
+			<id name="locationId" />
+			<basic name="libraryId" />
+			<basic name="companyId" />
+			<basic name="groupId" />
+			<basic name="locationName" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.kencana.lms.model.impl.MarcBatchUploadModelImpl">
+		<attributes>
+			<id name="marcBatchUploadId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="createBy" />
+			<basic name="createdDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="processed" />
+			<basic name="importDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="importByUserId" />
+			<basic name="partialImport" />
+			<basic name="fileCount" />
+			<basic name="description" />
+			<basic name="recordCount" />
+			<transient name="importByUserUuid" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.kencana.lms.model.impl.MarcBatchUploadItemModelImpl">
+		<attributes>
+			<id name="marcBatchUploadItemId" />
+			<basic name="marcBatchUploadId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="createdBy" />
+			<basic name="createdDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="processed" />
+			<basic name="importDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="importByUserId" />
+			<basic name="marcContent" />
+			<basic name="fileName" />
+			<basic name="fileEntryId" />
+			<transient name="importByUserUuid" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.kencana.lms.model.impl.MarcSubfieldModelImpl">
+		<attributes>
+			<id name="MarcSubfieldId" />
+			<basic name="tag" />
+			<basic name="tagType" />
+			<basic name="subfield" />
+			<basic name="description" />
+			<basic name="repetable" />
+			<basic name="mandatory" />
+			<basic name="authorisedValue" />
+			<basic name="authTypeCode" />
+			<basic name="isURL" />
+			<basic name="helpText" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.kencana.lms.model.impl.MarcTagModelImpl">
+		<attributes>
+			<id name="tagId" />
+			<basic name="tag" />
+			<basic name="description" />
+			<basic name="helpText" />
+			<basic name="repetable" />
+			<basic name="defaultValue" />
+			<basic name="indicator1" />
+			<basic name="indicator2" />
+			<basic name="tagType" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.kencana.lms.model.impl.PatronModelImpl">
+		<attributes>
+			<id name="patronId" />
+			<basic name="cardNumber" />
+			<basic name="userId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="libraryId" />
+			<basic name="expiryDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="patronCategoryId" />
+			<basic name="patronStatusId" />
+			<basic name="patronNote" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.kencana.lms.model.impl.PatronCategoryModelImpl">
+		<attributes>
+			<id name="patronCategoryId" />
+			<basic name="patronCategoryName" />
+			<basic name="notes" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.kencana.lms.model.impl.PatronStatusModelImpl">
+		<attributes>
+			<id name="patronStatusId" />
+			<basic name="patronStatusName" />
+			<basic name="noLogin" />
+			<basic name="noCheckout" />
+			<basic name="noReserve" />
+			<basic name="noRenew" />
+			<basic name="color" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.kencana.lms.model.impl.ReasonCodeModelImpl">
+		<attributes>
+			<id name="reasonCodeId" />
+			<basic name="reasonCodeName" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.kencana.lms.model.impl.VendorModelImpl">
+		<attributes>
+			<id name="vendorId" />
+			<basic name="vendorCode" />
+			<basic name="vendorName" />
+			<basic name="email" />
+			<basic name="url" />
+			<basic name="companyId" />
+			<basic name="groupId" />
+			<basic name="address1" />
+			<basic name="address2" />
+			<basic name="address3" />
+			<basic name="city" />
+			<basic name="zipcode" />
+			<basic name="contactPerson" />
+			<basic name="phone" />
+			<basic name="fax" />
+			<basic name="isPublisher" />
+			<basic name="isBinder" />
+			<basic name="isActive" />
+			<basic name="rating" />
+			<basic name="bankName" />
+			<basic name="bankAccount" />
+			<basic name="lastOrderDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="note" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<entity class="org.kencana.lms.model.impl.CatalogImpl" name="Catalog">
+		<table name="Catalog" />
+		<attributes />
+	</entity>
+	<entity class="org.kencana.lms.model.impl.CatalogItemImpl" name="CatalogItem">
+		<table name="CatalogItem" />
+		<attributes />
+	</entity>
+	<entity class="org.kencana.lms.model.impl.CatalogTemplateImpl" name="CatalogTemplate">
+		<table name="CatalogTemplate" />
+		<attributes />
+	</entity>
+	<entity class="org.kencana.lms.model.impl.CatalogTemplateSubfieldImpl" name="CatalogTemplateSubfield">
+		<table name="CatalogTemplateSubfield" />
+		<attributes />
+	</entity>
+	<entity class="org.kencana.lms.model.impl.CatalogTemplateTagImpl" name="CatalogTemplateTag">
+		<table name="CatalogTemplateTag" />
+		<attributes />
+	</entity>
+	<entity class="org.kencana.lms.model.impl.LibraryImpl" name="Library">
+		<table name="Library" />
+		<attributes />
+	</entity>
+	<entity class="org.kencana.lms.model.impl.MarcSubfieldImpl" name="MarcSubfield">
+		<table name="MarcSubfield" />
+		<attributes />
+	</entity>
+	<entity class="org.kencana.lms.model.impl.MarcTagImpl" name="MarcTag">
+		<table name="MarcTag" />
+		<attributes />
+	</entity>
+	<entity class="com.kencana.lms.model.impl.CatalogImpl" name="Catalog">
+		<table name="Kencana_Catalog" />
+		<attributes />
+	</entity>
+	<entity class="com.kencana.lms.model.impl.CatalogItemImpl" name="CatalogItem">
+		<table name="Kencana_CatalogItem" />
+		<attributes />
+	</entity>
+	<entity class="com.kencana.lms.model.impl.CatalogTemplateImpl" name="CatalogTemplate">
+		<table name="Kencana_CatalogTemplate" />
+		<attributes />
+	</entity>
+	<entity class="com.kencana.lms.model.impl.CatalogTemplateSubfieldImpl" name="CatalogTemplateSubfield">
+		<table name="Kencana_CatalogTemplateSubfield" />
+		<attributes />
+	</entity>
+	<entity class="com.kencana.lms.model.impl.CatalogTemplateTagImpl" name="CatalogTemplateTag">
+		<table name="Kencana_CatalogTemplateTag" />
+		<attributes />
+	</entity>
+	<entity class="com.kencana.lms.model.impl.CircTransHistoryImpl" name="CircTransHistory">
+		<table name="Kencana_CircTransHistory" />
+		<attributes />
+	</entity>
+	<entity class="com.kencana.lms.model.impl.CirculationRuleImpl" name="CirculationRule">
+		<table name="Kencana_CirculationRule" />
+		<attributes />
+	</entity>
+	<entity class="com.kencana.lms.model.impl.CirculationTransImpl" name="CirculationTrans">
+		<table name="Kencana_CirculationTrans" />
+		<attributes />
+	</entity>
+	<entity class="com.kencana.lms.model.impl.ItemCategoryImpl" name="ItemCategory">
+		<table name="Kencana_ItemCategory" />
+		<attributes />
+	</entity>
+	<entity class="com.kencana.lms.model.impl.ItemTypeImpl" name="ItemType">
+		<table name="Kencana_ItemType" />
+		<attributes />
+	</entity>
+	<entity class="com.kencana.lms.model.impl.LibraryImpl" name="Library">
+		<table name="Kencana_Library" />
+		<attributes />
+	</entity>
+	<entity class="com.kencana.lms.model.impl.LocationImpl" name="Location">
+		<table name="Kencana_Location" />
+		<attributes />
+	</entity>
+	<entity class="com.kencana.lms.model.impl.MarcBatchUploadImpl" name="MarcBatchUpload">
+		<table name="Kencana_MarcBatchUpload" />
+		<attributes />
+	</entity>
+	<entity class="com.kencana.lms.model.impl.MarcBatchUploadItemImpl" name="MarcBatchUploadItem">
+		<table name="Kencana_MarcBatchUploadItem" />
+		<attributes />
+	</entity>
+	<entity class="com.kencana.lms.model.impl.MarcSubfieldImpl" name="MarcSubfield">
+		<table name="Kencana_MarcSubfield" />
+		<attributes />
+	</entity>
+	<entity class="com.kencana.lms.model.impl.MarcTagImpl" name="MarcTag">
+		<table name="Kencana_MarcTag" />
+		<attributes />
+	</entity>
+	<entity class="com.kencana.lms.model.impl.PatronImpl" name="Patron">
+		<table name="Kencana_Patron" />
+		<attributes />
+	</entity>
+	<entity class="com.kencana.lms.model.impl.PatronCategoryImpl" name="PatronCategory">
+		<table name="Kencana_PatronCategory" />
+		<attributes />
+	</entity>
+	<entity class="com.kencana.lms.model.impl.PatronStatusImpl" name="PatronStatus">
+		<table name="Kencana_PatronStatus" />
+		<attributes />
+	</entity>
+	<entity class="com.kencana.lms.model.impl.ReasonCodeImpl" name="ReasonCode">
+		<table name="Kencana_ReasonCode" />
+		<attributes />
+	</entity>
+	<entity class="com.kencana.lms.model.impl.VendorImpl" name="Vendor">
+		<table name="Kencana_Vendor" />
+		<attributes />
+	</entity>
+</entity-mappings>

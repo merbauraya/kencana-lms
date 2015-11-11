@@ -1,0 +1,163 @@
+<%--
+/**
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 2.1 of the License, or (at your option)
+ * any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
+ */
+--%>
+
+
+
+<%
+SearchContainer searchContainer = new PatronSearch(renderRequest, "cur2", currentURLObj);
+
+searchContainer.setRowChecker(new RowChecker(renderResponse));
+
+if (!ParamUtil.getBoolean(renderRequest, "advancedSearch")) {
+	currentURLObj.setParameter("status", String.valueOf(status));
+}
+%>
+
+<liferay-ui:search-container
+	searchContainer="<%= searchContainer %>"
+	var="userSearchContainer"
+>
+	<aui:input disabled="<%= true %>" name="usersRedirect" type="hidden" value="<%= currentURLObj.toString() %>" />
+	<aui:input name="deleteUserIds" type="hidden" />
+
+	<%
+	PatronSearchTerms searchTerms = (PatronSearchTerms)userSearchContainer.getSearchTerms();
+
+
+	status = WorkflowConstants.STATUS_APPROVED;
+	
+
+	PatronDisplayTerms displayTerms = (PatronDisplayTerms)userSearchContainer.getDisplayTerms();
+
+	if (!searchTerms.isAdvancedSearch()) {
+		if (status == WorkflowConstants.STATUS_APPROVED) {
+			displayTerms.setStatus(WorkflowConstants.STATUS_APPROVED);
+			searchTerms.setStatus(WorkflowConstants.STATUS_APPROVED);
+		}
+		else {
+			displayTerms.setStatus(WorkflowConstants.STATUS_INACTIVE);
+			searchTerms.setStatus(WorkflowConstants.STATUS_INACTIVE);
+		}
+	}
+	
+	long userOrganizationId = searchTerms.getOrganizationId();
+	long roleId = searchTerms.getRoleId();
+	long userGroupId = searchTerms.getUserGroupId();
+	boolean showActiveUserSelect = true;
+	//Organization userOrganization = null;
+
+	
+%>
+	
+
+
+	
+
+
+		<aui:nav-bar>
+			<liferay-util:include page="/html/admin/patron/toolbar.jsp" />
+
+			
+				<aui:nav-bar-search cssClass="pull-right">
+					<liferay-ui:search-form
+						page="/html/admin/patron/patron_search.jsp"
+						searchContainer="<%= searchContainer %>"
+						servletContext="<%= this.getServletConfig().getServletContext() %>"
+					/>
+				</aui:nav-bar-search>
+			
+		</aui:nav-bar>
+
+
+	
+
+
+	
+
+	<%
+	
+
+	if (userOrganizationId > 0) {
+		userParams.put("usersOrgs", new Long(userOrganizationId));
+	}
+	/*
+	else if (usersListView.equals(UserConstants.LIST_VIEW_TREE) && Validator.isNull(searchTerms.getKeywords())) {
+		userParams.put("noOrganizations", Boolean.TRUE);
+		userParams.put("usersOrgsCount", 0);
+	}
+	else {
+		if (filterManageableOrganizations && !UserPermissionUtil.contains(permissionChecker, ResourceConstants.PRIMKEY_DNE, ActionKeys.VIEW)) {
+			Long[] organizationIds = UsersAdminUtil.getOrganizationIds(user.getOrganizations());
+
+			userParams.put("usersOrgs", organizationIds);
+		}
+	}*/
+
+	
+	%>
+
+	<liferay-ui:search-container-results>
+		<%@ include file="/html/admin/patron/patron_search_results.jspf" %>
+		
+	</liferay-ui:search-container-results>
+
+	<liferay-ui:search-container-row
+		className="com.liferay.portal.model.User"
+		escapedModel="<%= true %>"
+		keyProperty="userId"
+		modelVar="user2"
+		rowIdProperty="screenName"
+	>
+		<liferay-portlet:renderURL varImpl="rowURL">
+			<portlet:param name="page" value="/html/admin/patron/view_patron_details.jsp" />
+			<portlet:param name="redirect" value="<%= userSearchContainer.getIteratorURL().toString() %>" />
+			<portlet:param name="p_u_i_d" value="<%= String.valueOf(user2.getUserId()) %>" />
+		</liferay-portlet:renderURL>
+
+		<%
+		if (!UserPermissionUtil.contains(permissionChecker, user2.getUserId(), ActionKeys.UPDATE)) {
+			rowURL = null;
+		}
+		%>
+
+		<%@ include file="/html/admin/patron/search_columns.jspf" %>
+
+		<liferay-ui:search-container-column-jsp
+			align="right"
+			path="/html/admin/patron/patron_action.jsp"
+		/>
+	</liferay-ui:search-container-row>
+
+	<%
+	boolean showDeleteButton = false;//!results.isEmpty() && (searchTerms.getStatus() != WorkflowConstants.STATUS_ANY) && (searchTerms.isActive() || (!searchTerms.isActive() && PropsValues.USERS_DELETE));
+	boolean showRestoreButton = false;//!results.isEmpty() && (searchTerms.getStatus() != WorkflowConstants.STATUS_ANY) && !searchTerms.isActive();
+	%>
+
+	
+
+	<%
+	if (!showDeleteButton && !showRestoreButton) {
+		userSearchContainer.setRowChecker(null);
+	}
+	%>
+
+	<liferay-ui:search-iterator />
+</liferay-ui:search-container>
+
+<aui:script>
+	Liferay.Util.toggleSearchContainerButton('#<portlet:namespace />deactivate', '#<portlet:namespace /><%= searchContainerReference.getId("userSearchContainer") %>SearchContainer', document.<portlet:namespace />fm, '<portlet:namespace />allRowIds');
+	Liferay.Util.toggleSearchContainerButton('#<portlet:namespace />restore', '#<portlet:namespace /><%= searchContainerReference.getId("userSearchContainer") %>SearchContainer', document.<portlet:namespace />fm, '<portlet:namespace />allRowIds');
+</aui:script>

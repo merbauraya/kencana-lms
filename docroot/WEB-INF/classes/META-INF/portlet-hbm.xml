@@ -1,0 +1,400 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="com.kencana.lms.model.Catalog" />
+	<import class="com.kencana.lms.model.CatalogItem" />
+	<import class="com.kencana.lms.model.CatalogTemplate" />
+	<import class="com.kencana.lms.model.CatalogTemplateSubfield" />
+	<import class="com.kencana.lms.model.CatalogTemplateTag" />
+	<import class="com.kencana.lms.model.CircTransHistory" />
+	<import class="com.kencana.lms.model.CirculationRule" />
+	<import class="com.kencana.lms.model.CirculationTrans" />
+	<import class="com.kencana.lms.model.ItemCategory" />
+	<import class="com.kencana.lms.model.ItemType" />
+	<import class="com.kencana.lms.model.Library" />
+	<import class="com.kencana.lms.model.Location" />
+	<import class="com.kencana.lms.model.MarcBatchUpload" />
+	<import class="com.kencana.lms.model.MarcBatchUploadItem" />
+	<import class="com.kencana.lms.model.MarcSubfield" />
+	<import class="com.kencana.lms.model.MarcTag" />
+	<import class="com.kencana.lms.model.Patron" />
+	<import class="com.kencana.lms.model.PatronCategory" />
+	<import class="com.kencana.lms.model.PatronStatus" />
+	<import class="com.kencana.lms.model.ReasonCode" />
+	<import class="com.kencana.lms.model.Vendor" />
+	<class name="com.kencana.lms.model.impl.CatalogImpl" table="Kencana_Catalog">
+		<cache usage="read-write" />
+		<id name="catalogId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createdByUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="itemTypeId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="title" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="author" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="publisher" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="isbn" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="issn" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="callNumber" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="UUID" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="catalogAbstract" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="templateId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="visible" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="coverImageId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="marc" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="workflowStatus" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+	</class>
+	<class name="com.kencana.lms.model.impl.CatalogItemImpl" table="Kencana_CatalogItem">
+		<cache usage="read-write" />
+		<id name="catalogItemId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="catalogId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="catalogTitle" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="callNumber" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="holdingLibraryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="currentLibraryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="barcode" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="copyNumber" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="locationId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="itemCategoryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="itemTypeId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="withdrawnStatus" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="lostStatus" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="damageStatus" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="notForLoanStatus" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="lastSeenDate" type="org.hibernate.type.TimestampType" />
+		<property name="withdrawnDate" type="org.hibernate.type.TimestampType" />
+		<property name="lostDate" type="org.hibernate.type.TimestampType" />
+		<property name="lastCheckOutDate" type="org.hibernate.type.TimestampType" />
+		<property name="circulationCount" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="renewalCount" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="reservedCount" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="checkedOutDate" type="org.hibernate.type.TimestampType" />
+		<property name="reservedBy" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="claimCount" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="dueDate" type="org.hibernate.type.TimestampType" />
+		<property name="checkOutBy" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="released" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="releaseDate" type="org.hibernate.type.TimestampType" />
+		<property name="releaseByUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="vendorId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="invoiceId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="purchasePrice" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="replacementPrice" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="currencyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="localPurchasePrice" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="publicNote" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="privateNote" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="acquiredDate" type="org.hibernate.type.TimestampType" />
+		<property name="workflowStatus" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+	</class>
+	<class name="com.kencana.lms.model.impl.CatalogTemplateImpl" table="Kencana_CatalogTemplate">
+		<cache usage="read-write" />
+		<id name="templateId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="templateName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="active" type="com.liferay.portal.dao.orm.hibernate.BooleanType" column="active_" />
+		<property name="createBy" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="createdDate" type="org.hibernate.type.TimestampType" />
+	</class>
+	<class name="com.kencana.lms.model.impl.CatalogTemplateSubfieldImpl" table="Kencana_CatalogTemplateSubfield">
+		<cache usage="read-write" />
+		<id name="catalogTemplateSubfieldId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="catalogTemplateTagId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="subfield" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="repeatable" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="mandatory" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="isURL" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+	</class>
+	<class name="com.kencana.lms.model.impl.CatalogTemplateTagImpl" table="Kencana_CatalogTemplateTag">
+		<cache usage="read-write" />
+		<id name="catelogTemplateTagId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="catelogTemplateId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="tag" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="repeatable" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="mandatory" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="helpText" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.kencana.lms.model.impl.CircTransHistoryImpl" table="Kencana_CircTransHistory">
+		<cache usage="read-write" />
+		<id name="transId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="libraryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="patronId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="catalogItemId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="transDate" type="org.hibernate.type.TimestampType" />
+		<property name="dueDate" type="org.hibernate.type.TimestampType" />
+		<property name="overdue" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="returnDate" type="org.hibernate.type.TimestampType" />
+		<property name="lastRenewDate" type="org.hibernate.type.TimestampType" />
+		<property name="renewCount" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="fineAmount" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+	</class>
+	<class name="com.kencana.lms.model.impl.CirculationRuleImpl" table="Kencana_CirculationRule">
+		<cache usage="read-write" />
+		<id name="circulationRuleId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="libraryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="patronCategoryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="itemTypeId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="itemCategoryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="maxCheckoutAllowed" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="renewalCountAllowed" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="reservedCountAllowed" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="periodUnit" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="loanPeriod" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="loanPeriodIfReserved" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="rentalCharge" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="finePerPeriod" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="fineGracePeriod" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="maxFineAmount" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="createdDate" type="org.hibernate.type.TimestampType" />
+	</class>
+	<class name="com.kencana.lms.model.impl.CirculationTransImpl" table="Kencana_CirculationTrans">
+		<cache usage="read-write" />
+		<id name="transId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="libraryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="patronId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="catalogItemId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="transDate" type="org.hibernate.type.TimestampType" />
+		<property name="dueDate" type="org.hibernate.type.TimestampType" />
+		<property name="overdue" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="returnDate" type="org.hibernate.type.TimestampType" />
+		<property name="lastRenewDate" type="org.hibernate.type.TimestampType" />
+		<property name="renewCount" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+	</class>
+	<class name="com.kencana.lms.model.impl.ItemCategoryImpl" table="Kencana_ItemCategory">
+		<cache usage="read-write" />
+		<id name="itemCategoryId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="itemCategoryName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+	</class>
+	<class name="com.kencana.lms.model.impl.ItemTypeImpl" table="Kencana_ItemType">
+		<cache usage="read-write" />
+		<id name="itemTypeId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="itemTypeName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="notForLoan" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="coverId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="checkoutMessage" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="checkinMessage" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="rentalRate" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+	</class>
+	<class name="com.kencana.lms.model.impl.LibraryImpl" table="Kencana_Library">
+		<cache usage="read-write" />
+		<id name="libraryId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="libraryName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="address1" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="address2" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="address3" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="zipcode" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="city" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="state" type="com.liferay.portal.dao.orm.hibernate.StringType" column="state_" />
+		<property name="country" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="phone" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="email" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="website" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="notes" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.kencana.lms.model.impl.LocationImpl" table="Kencana_Location">
+		<cache usage="read-write" />
+		<id name="locationId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="libraryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="locationName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.kencana.lms.model.impl.MarcBatchUploadImpl" table="Kencana_MarcBatchUpload">
+		<cache usage="read-write" />
+		<id name="marcBatchUploadId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="createBy" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="createdDate" type="org.hibernate.type.TimestampType" />
+		<property name="processed" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="importDate" type="org.hibernate.type.TimestampType" />
+		<property name="importByUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="partialImport" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="fileCount" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="recordCount" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+	</class>
+	<class name="com.kencana.lms.model.impl.MarcBatchUploadItemImpl" table="Kencana_MarcBatchUploadItem">
+		<cache usage="read-write" />
+		<id name="marcBatchUploadItemId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="marcBatchUploadId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="createdBy" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="createdDate" type="org.hibernate.type.TimestampType" />
+		<property name="processed" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="importDate" type="org.hibernate.type.TimestampType" />
+		<property name="importByUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="marcContent" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="fileName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="fileEntryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="com.kencana.lms.model.impl.MarcSubfieldImpl" table="Kencana_MarcSubfield">
+		<cache usage="read-write" />
+		<id name="MarcSubfieldId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="tag" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="tagType" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="subfield" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="repetable" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="mandatory" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="authorisedValue" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="authTypeCode" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="isURL" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="helpText" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.kencana.lms.model.impl.MarcTagImpl" table="Kencana_MarcTag">
+		<cache usage="read-write" />
+		<id name="tagId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="tag" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="helpText" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="repetable" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="defaultValue" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="indicator1" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="indicator2" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="tagType" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.kencana.lms.model.impl.PatronImpl" table="Kencana_Patron">
+		<cache usage="read-write" />
+		<id name="patronId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="cardNumber" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="libraryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="expiryDate" type="org.hibernate.type.TimestampType" />
+		<property name="patronCategoryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="patronStatusId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="patronNote" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.kencana.lms.model.impl.PatronCategoryImpl" table="Kencana_PatronCategory">
+		<cache usage="read-write" />
+		<id name="patronCategoryId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="patronCategoryName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="notes" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="com.kencana.lms.model.impl.PatronStatusImpl" table="Kencana_PatronStatus">
+		<cache usage="read-write" />
+		<id name="patronStatusId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="patronStatusName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="noLogin" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="noCheckout" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="noReserve" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="noRenew" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="color" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="com.kencana.lms.model.impl.ReasonCodeImpl" table="Kencana_ReasonCode">
+		<cache usage="read-write" />
+		<id name="reasonCodeId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="reasonCodeName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="com.kencana.lms.model.impl.VendorImpl" table="Kencana_Vendor">
+		<cache usage="read-write" />
+		<id name="vendorId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="vendorCode" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="vendorName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="email" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="url" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="address1" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="address2" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="address3" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="city" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="zipcode" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="contactPerson" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="phone" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="fax" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="isPublisher" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="isBinder" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="isActive" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="rating" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="bankName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="bankAccount" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="lastOrderDate" type="org.hibernate.type.TimestampType" />
+		<property name="note" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+</hibernate-mapping>

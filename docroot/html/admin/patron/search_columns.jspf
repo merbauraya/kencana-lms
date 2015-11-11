@@ -1,0 +1,95 @@
+<%--
+/**
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 2.1 of the License, or (at your option)
+ * any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
+ */
+--%>
+<%
+	Patron patron = PatronLocalServiceUtil.safeFindByUserId(user2.getUserId());
+	
+	Date expiryDate = patron.getExpiryDate();
+	
+	String patronStatusText = StringPool.BLANK;
+	String patronCategoryText = StringPool.BLANK;
+		 
+	PatronStatus patronStatus = PatronStatusLocalServiceUtil.fetchPatronStatus(patron.getPatronStatusId());
+	PatronCategory patronCategory = PatronCategoryLocalServiceUtil.fetchPatronCategory(patron.getPatronCategoryId());
+	
+	if (Validator.isNotNull(patronStatus) && Validator.isNotNull(patronCategory))
+	{
+		patronStatusText = patronStatus.getPatronStatusName();
+		patronCategoryText = patronCategory.getPatronCategoryName();
+	}
+
+%>
+<liferay-ui:search-container-column-text
+	href="<%= rowURL %>"
+	name="first-name"
+	orderable="<%= true %>"
+	property="firstName"
+/>
+
+<liferay-ui:search-container-column-text
+	href="<%= rowURL %>"
+	name="last-name"
+	orderable="<%= true %>"
+	property="lastName"
+/>
+
+<liferay-ui:search-container-column-text
+	href="<%= rowURL %>"
+	name="screen-name"
+	orderable="<%= true %>"
+	property="screenName"
+/>
+
+<liferay-ui:search-container-column-text
+	href="<%= rowURL %>"
+	name="job-title"
+	orderable="<%= true %>"
+	value="<%= user2.getJobTitle() %>"
+/>
+
+
+<liferay-ui:search-container-column-text
+	href="<%= rowURL %>"
+	name="card-number"
+	orderable="<%= true %>"
+	value="<%= patron.getCardNumber() %>"
+/>
+<liferay-ui:search-container-column-text
+	href="<%= rowURL %>"
+	name="patron-status"
+	orderable="<%= false %>"
+	value="<%= patronStatusText %>"
+/>
+<liferay-ui:search-container-column-text
+	href="<%= rowURL %>"
+	name="patron-category"
+	orderable="<%= false %>"
+	value="<%= patronCategoryText %>"
+/>
+<liferay-ui:search-container-column-text
+	href="<%= rowURL %>"
+	name="patron-category"
+	orderable="<%= false %>"
+	value="<%= patronCategoryText %>"
+/>
+<liferay-ui:search-container-column-date
+	href="<%= rowURL %>"
+	name="expiry-date"
+	orderable="<%= false %>"
+	value="<%= expiryDate %>"
+/>
+
+
+

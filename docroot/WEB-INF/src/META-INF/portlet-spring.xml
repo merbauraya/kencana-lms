@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<bean id="com.kencana.lms.service.CatalogLocalService" class="com.kencana.lms.service.impl.CatalogLocalServiceImpl" />
+	<bean id="com.kencana.lms.service.CatalogService" class="com.kencana.lms.service.impl.CatalogServiceImpl" />
+	<bean id="com.kencana.lms.service.persistence.CatalogPersistence" class="com.kencana.lms.service.persistence.CatalogPersistenceImpl" parent="basePersistence" />
+	<bean id="com.kencana.lms.service.CatalogItemLocalService" class="com.kencana.lms.service.impl.CatalogItemLocalServiceImpl" />
+	<bean id="com.kencana.lms.service.CatalogItemService" class="com.kencana.lms.service.impl.CatalogItemServiceImpl" />
+	<bean id="com.kencana.lms.service.persistence.CatalogItemPersistence" class="com.kencana.lms.service.persistence.CatalogItemPersistenceImpl" parent="basePersistence" />
+	<bean id="com.kencana.lms.service.CatalogTemplateLocalService" class="com.kencana.lms.service.impl.CatalogTemplateLocalServiceImpl" />
+	<bean id="com.kencana.lms.service.CatalogTemplateService" class="com.kencana.lms.service.impl.CatalogTemplateServiceImpl" />
+	<bean id="com.kencana.lms.service.persistence.CatalogTemplatePersistence" class="com.kencana.lms.service.persistence.CatalogTemplatePersistenceImpl" parent="basePersistence" />
+	<bean id="com.kencana.lms.service.CatalogTemplateSubfieldLocalService" class="com.kencana.lms.service.impl.CatalogTemplateSubfieldLocalServiceImpl" />
+	<bean id="com.kencana.lms.service.CatalogTemplateSubfieldService" class="com.kencana.lms.service.impl.CatalogTemplateSubfieldServiceImpl" />
+	<bean id="com.kencana.lms.service.persistence.CatalogTemplateSubfieldPersistence" class="com.kencana.lms.service.persistence.CatalogTemplateSubfieldPersistenceImpl" parent="basePersistence" />
+	<bean id="com.kencana.lms.service.CatalogTemplateTagLocalService" class="com.kencana.lms.service.impl.CatalogTemplateTagLocalServiceImpl" />
+	<bean id="com.kencana.lms.service.CatalogTemplateTagService" class="com.kencana.lms.service.impl.CatalogTemplateTagServiceImpl" />
+	<bean id="com.kencana.lms.service.persistence.CatalogTemplateTagPersistence" class="com.kencana.lms.service.persistence.CatalogTemplateTagPersistenceImpl" parent="basePersistence" />
+	<bean id="com.kencana.lms.service.CircTransHistoryLocalService" class="com.kencana.lms.service.impl.CircTransHistoryLocalServiceImpl" />
+	<bean id="com.kencana.lms.service.CircTransHistoryService" class="com.kencana.lms.service.impl.CircTransHistoryServiceImpl" />
+	<bean id="com.kencana.lms.service.persistence.CircTransHistoryPersistence" class="com.kencana.lms.service.persistence.CircTransHistoryPersistenceImpl" parent="basePersistence" />
+	<bean id="com.kencana.lms.service.CirculationRuleLocalService" class="com.kencana.lms.service.impl.CirculationRuleLocalServiceImpl" />
+	<bean id="com.kencana.lms.service.CirculationRuleService" class="com.kencana.lms.service.impl.CirculationRuleServiceImpl" />
+	<bean id="com.kencana.lms.service.persistence.CirculationRulePersistence" class="com.kencana.lms.service.persistence.CirculationRulePersistenceImpl" parent="basePersistence" />
+	<bean id="com.kencana.lms.service.CirculationTransLocalService" class="com.kencana.lms.service.impl.CirculationTransLocalServiceImpl" />
+	<bean id="com.kencana.lms.service.CirculationTransService" class="com.kencana.lms.service.impl.CirculationTransServiceImpl" />
+	<bean id="com.kencana.lms.service.persistence.CirculationTransPersistence" class="com.kencana.lms.service.persistence.CirculationTransPersistenceImpl" parent="basePersistence" />
+	<bean id="com.kencana.lms.service.ItemCategoryLocalService" class="com.kencana.lms.service.impl.ItemCategoryLocalServiceImpl" />
+	<bean id="com.kencana.lms.service.ItemCategoryService" class="com.kencana.lms.service.impl.ItemCategoryServiceImpl" />
+	<bean id="com.kencana.lms.service.persistence.ItemCategoryPersistence" class="com.kencana.lms.service.persistence.ItemCategoryPersistenceImpl" parent="basePersistence" />
+	<bean id="com.kencana.lms.service.ItemTypeLocalService" class="com.kencana.lms.service.impl.ItemTypeLocalServiceImpl" />
+	<bean id="com.kencana.lms.service.ItemTypeService" class="com.kencana.lms.service.impl.ItemTypeServiceImpl" />
+	<bean id="com.kencana.lms.service.persistence.ItemTypePersistence" class="com.kencana.lms.service.persistence.ItemTypePersistenceImpl" parent="basePersistence" />
+	<bean id="com.kencana.lms.service.LibraryLocalService" class="com.kencana.lms.service.impl.LibraryLocalServiceImpl" />
+	<bean id="com.kencana.lms.service.LibraryService" class="com.kencana.lms.service.impl.LibraryServiceImpl" />
+	<bean id="com.kencana.lms.service.persistence.LibraryPersistence" class="com.kencana.lms.service.persistence.LibraryPersistenceImpl" parent="basePersistence" />
+	<bean id="com.kencana.lms.service.LocationLocalService" class="com.kencana.lms.service.impl.LocationLocalServiceImpl" />
+	<bean id="com.kencana.lms.service.LocationService" class="com.kencana.lms.service.impl.LocationServiceImpl" />
+	<bean id="com.kencana.lms.service.persistence.LocationPersistence" class="com.kencana.lms.service.persistence.LocationPersistenceImpl" parent="basePersistence" />
+	<bean id="com.kencana.lms.service.MarcBatchUploadLocalService" class="com.kencana.lms.service.impl.MarcBatchUploadLocalServiceImpl" />
+	<bean id="com.kencana.lms.service.MarcBatchUploadService" class="com.kencana.lms.service.impl.MarcBatchUploadServiceImpl" />
+	<bean id="com.kencana.lms.service.persistence.MarcBatchUploadPersistence" class="com.kencana.lms.service.persistence.MarcBatchUploadPersistenceImpl" parent="basePersistence" />
+	<bean id="com.kencana.lms.service.MarcBatchUploadItemLocalService" class="com.kencana.lms.service.impl.MarcBatchUploadItemLocalServiceImpl" />
+	<bean id="com.kencana.lms.service.MarcBatchUploadItemService" class="com.kencana.lms.service.impl.MarcBatchUploadItemServiceImpl" />
+	<bean id="com.kencana.lms.service.persistence.MarcBatchUploadItemPersistence" class="com.kencana.lms.service.persistence.MarcBatchUploadItemPersistenceImpl" parent="basePersistence" />
+	<bean id="com.kencana.lms.service.MarcSubfieldLocalService" class="com.kencana.lms.service.impl.MarcSubfieldLocalServiceImpl" />
+	<bean id="com.kencana.lms.service.MarcSubfieldService" class="com.kencana.lms.service.impl.MarcSubfieldServiceImpl" />
+	<bean id="com.kencana.lms.service.persistence.MarcSubfieldPersistence" class="com.kencana.lms.service.persistence.MarcSubfieldPersistenceImpl" parent="basePersistence" />
+	<bean id="com.kencana.lms.service.MarcTagLocalService" class="com.kencana.lms.service.impl.MarcTagLocalServiceImpl" />
+	<bean id="com.kencana.lms.service.MarcTagService" class="com.kencana.lms.service.impl.MarcTagServiceImpl" />
+	<bean id="com.kencana.lms.service.persistence.MarcTagPersistence" class="com.kencana.lms.service.persistence.MarcTagPersistenceImpl" parent="basePersistence" />
+	<bean id="com.kencana.lms.service.PatronLocalService" class="com.kencana.lms.service.impl.PatronLocalServiceImpl" />
+	<bean id="com.kencana.lms.service.PatronService" class="com.kencana.lms.service.impl.PatronServiceImpl" />
+	<bean id="com.kencana.lms.service.persistence.PatronPersistence" class="com.kencana.lms.service.persistence.PatronPersistenceImpl" parent="basePersistence" />
+	<bean id="com.kencana.lms.service.PatronCategoryLocalService" class="com.kencana.lms.service.impl.PatronCategoryLocalServiceImpl" />
+	<bean id="com.kencana.lms.service.PatronCategoryService" class="com.kencana.lms.service.impl.PatronCategoryServiceImpl" />
+	<bean id="com.kencana.lms.service.persistence.PatronCategoryPersistence" class="com.kencana.lms.service.persistence.PatronCategoryPersistenceImpl" parent="basePersistence" />
+	<bean id="com.kencana.lms.service.PatronStatusLocalService" class="com.kencana.lms.service.impl.PatronStatusLocalServiceImpl" />
+	<bean id="com.kencana.lms.service.PatronStatusService" class="com.kencana.lms.service.impl.PatronStatusServiceImpl" />
+	<bean id="com.kencana.lms.service.persistence.PatronStatusPersistence" class="com.kencana.lms.service.persistence.PatronStatusPersistenceImpl" parent="basePersistence" />
+	<bean id="com.kencana.lms.service.ReasonCodeLocalService" class="com.kencana.lms.service.impl.ReasonCodeLocalServiceImpl" />
+	<bean id="com.kencana.lms.service.ReasonCodeService" class="com.kencana.lms.service.impl.ReasonCodeServiceImpl" />
+	<bean id="com.kencana.lms.service.persistence.ReasonCodePersistence" class="com.kencana.lms.service.persistence.ReasonCodePersistenceImpl" parent="basePersistence" />
+	<bean id="com.kencana.lms.service.VendorLocalService" class="com.kencana.lms.service.impl.VendorLocalServiceImpl" />
+	<bean id="com.kencana.lms.service.VendorService" class="com.kencana.lms.service.impl.VendorServiceImpl" />
+	<bean id="com.kencana.lms.service.persistence.VendorPersistence" class="com.kencana.lms.service.persistence.VendorPersistenceImpl" parent="basePersistence" />
+</beans>

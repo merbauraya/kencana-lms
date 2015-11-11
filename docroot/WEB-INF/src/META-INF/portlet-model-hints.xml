@@ -1,0 +1,368 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<hint-collection name="CLOB">
+		<hint name="max-length">20000000</hint>
+		<hint name="display-width">500</hint>
+		<hint name="display-height">105</hint>
+	</hint-collection>
+	<hint-collection name="MEDIUMTEXT">
+		<hint name="max-length">1600000</hint>
+		<hint name="display-width">500</hint>
+		<hint name="display-height">105</hint>
+	</hint-collection>
+	<hint-collection name="URL">
+		<hint name="max-length">4000</hint>
+	</hint-collection>
+	<hint-collection name="TEXTAREA">
+		<hint name="display-height">105</hint>
+		<hint name="display-width">500</hint>
+		<hint name="max-length">4000</hint>
+	</hint-collection>
+	<model name="com.kencana.lms.model.Catalog">
+		<field name="catalogId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createdByUserId" type="long" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="itemTypeId" type="long" />
+		<field name="title" type="String">
+			<hint-collection name="MEDIUMTEXT" />
+		</field>
+		<field name="author" type="String">
+			<hint-collection name="MEDIUMTEXT" />
+		</field>
+		<field name="publisher" type="String" />
+		<field name="isbn" type="String" />
+		<field name="issn" type="String" />
+		<field name="callNumber" type="String" />
+		<field name="UUID" type="String" />
+		<field name="catalogAbstract" type="String">
+			<hint-collection name="MEDIUMTEXT" />
+		</field>
+		<field name="templateId" type="long" />
+		<field name="visible" type="boolean" />
+		<field name="coverImageId" type="long" />
+		<field name="marc" type="String">
+			<hint-collection name="CLOB" />
+		</field>
+		<field name="workflowStatus" type="int" />
+	</model>
+	<model name="com.kencana.lms.model.CatalogItem">
+		<field name="catalogItemId" type="long" />
+		<field name="catalogId" type="long" />
+		<field name="catalogTitle" type="String" />
+		<field name="callNumber" type="String" />
+		<field name="holdingLibraryId" type="long" />
+		<field name="currentLibraryId" type="long" />
+		<field name="barcode" type="String" />
+		<field name="copyNumber" type="int" />
+		<field name="locationId" type="long" />
+		<field name="itemCategoryId" type="long" />
+		<field name="itemTypeId" type="long" />
+		<field name="withdrawnStatus" type="boolean" />
+		<field name="lostStatus" type="boolean" />
+		<field name="damageStatus" type="boolean" />
+		<field name="notForLoanStatus" type="boolean" />
+		<field name="lastSeenDate" type="Date" />
+		<field name="withdrawnDate" type="Date" />
+		<field name="lostDate" type="Date" />
+		<field name="lastCheckOutDate" type="Date" />
+		<field name="circulationCount" type="int" />
+		<field name="renewalCount" type="int" />
+		<field name="reservedCount" type="int" />
+		<field name="checkedOutDate" type="Date" />
+		<field name="reservedBy" type="long" />
+		<field name="claimCount" type="Double" />
+		<field name="dueDate" type="Date" />
+		<field name="checkOutBy" type="long" />
+		<field name="released" type="boolean" />
+		<field name="releaseDate" type="Date" />
+		<field name="releaseByUserId" type="long" />
+		<field name="vendorId" type="long" />
+		<field name="invoiceId" type="long" />
+		<field name="purchasePrice" type="double" />
+		<field name="replacementPrice" type="double" />
+		<field name="currencyId" type="long" />
+		<field name="localPurchasePrice" type="double" />
+		<field name="publicNote" type="String">
+			<hint-collection name="CLOB" />
+		</field>
+		<field name="privateNote" type="String">
+			<hint-collection name="CLOB" />
+		</field>
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="acquiredDate" type="Date" />
+		<field name="workflowStatus" type="int" />
+	</model>
+	<model name="com.kencana.lms.model.CatalogTemplate">
+		<field name="templateId" type="long" />
+		<field name="templateName" type="String" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="description" type="String" />
+		<field name="active" type="boolean" />
+		<field name="createBy" type="long" />
+		<field name="createdDate" type="Date" />
+	</model>
+	<model name="com.kencana.lms.model.CatalogTemplateSubfield">
+		<field name="catalogTemplateSubfieldId" type="long" />
+		<field name="catalogTemplateTagId" type="long" />
+		<field name="subfield" type="String" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="repeatable" type="boolean" />
+		<field name="mandatory" type="boolean" />
+		<field name="isURL" type="boolean" />
+	</model>
+	<model name="com.kencana.lms.model.CatalogTemplateTag">
+		<field name="catelogTemplateTagId" type="long" />
+		<field name="catelogTemplateId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="tag" type="String" />
+		<field name="repeatable" type="boolean" />
+		<field name="mandatory" type="boolean" />
+		<field name="helpText" type="String" />
+	</model>
+	<model name="com.kencana.lms.model.CircTransHistory">
+		<field name="transId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="libraryId" type="long" />
+		<field name="patronId" type="long" />
+		<field name="catalogItemId" type="long" />
+		<field name="transDate" type="Date" />
+		<field name="dueDate" type="Date" />
+		<field name="overdue" type="boolean" />
+		<field name="returnDate" type="Date" />
+		<field name="lastRenewDate" type="Date" />
+		<field name="renewCount" type="int" />
+		<field name="fineAmount" type="Double" />
+	</model>
+	<model name="com.kencana.lms.model.CirculationRule">
+		<field name="circulationRuleId" type="long" />
+		<field name="libraryId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="patronCategoryId" type="long" />
+		<field name="itemTypeId" type="long" />
+		<field name="itemCategoryId" type="long" />
+		<field name="maxCheckoutAllowed" type="int" />
+		<field name="renewalCountAllowed" type="int" />
+		<field name="reservedCountAllowed" type="int" />
+		<field name="periodUnit" type="int" />
+		<field name="loanPeriod" type="int" />
+		<field name="loanPeriodIfReserved" type="int" />
+		<field name="rentalCharge" type="double" />
+		<field name="finePerPeriod" type="double" />
+		<field name="fineGracePeriod" type="int" />
+		<field name="maxFineAmount" type="double" />
+		<field name="userId" type="long" />
+		<field name="createdDate" type="Date" />
+	</model>
+	<model name="com.kencana.lms.model.CirculationTrans">
+		<field name="transId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="libraryId" type="long" />
+		<field name="patronId" type="long" />
+		<field name="catalogItemId" type="long" />
+		<field name="transDate" type="Date" />
+		<field name="dueDate" type="Date" />
+		<field name="overdue" type="boolean" />
+		<field name="returnDate" type="Date" />
+		<field name="lastRenewDate" type="Date" />
+		<field name="renewCount" type="int" />
+	</model>
+	<model name="com.kencana.lms.model.ItemCategory">
+		<field name="itemCategoryId" type="long" />
+		<field name="itemCategoryName" type="String" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="createDate" type="Date" />
+		<field name="userId" type="long" />
+		<field name="modifiedDate" type="Date" />
+	</model>
+	<model name="com.kencana.lms.model.ItemType">
+		<field name="itemTypeId" type="long" />
+		<field name="itemTypeName" type="String" />
+		<field name="notForLoan" type="boolean" />
+		<field name="coverId" type="long" />
+		<field name="checkoutMessage" type="String" />
+		<field name="checkinMessage" type="String" />
+		<field name="rentalRate" type="Double" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="userId" type="long" />
+		<field name="createDate" type="Date" />
+	</model>
+	<model name="com.kencana.lms.model.Library">
+		<field name="libraryId" type="long" />
+		<field name="libraryName" type="String">
+			<validator name="required" />
+		</field>
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="address1" type="String" />
+		<field name="address2" type="String" />
+		<field name="address3" type="String" />
+		<field name="zipcode" type="String" />
+		<field name="city" type="String" />
+		<field name="state" type="String" />
+		<field name="country" type="String" />
+		<field name="phone" type="String" />
+		<field name="email" type="String">
+			<validator name="email" />
+		</field>
+		<field name="website" type="String">
+			<hint-collection name="URL" />
+			<validator name="url" />
+		</field>
+		<field name="notes" type="String">
+			<hint-collection name="CLOB" />
+		</field>
+	</model>
+	<model name="com.kencana.lms.model.Location">
+		<field name="locationId" type="long" />
+		<field name="libraryId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="locationName" type="String" />
+	</model>
+	<model name="com.kencana.lms.model.MarcBatchUpload">
+		<field name="marcBatchUploadId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="createBy" type="long" />
+		<field name="createdDate" type="Date" />
+		<field name="processed" type="boolean" />
+		<field name="importDate" type="Date" />
+		<field name="importByUserId" type="long" />
+		<field name="partialImport" type="boolean" />
+		<field name="fileCount" type="int" />
+		<field name="description" type="String" />
+		<field name="recordCount" type="int" />
+	</model>
+	<model name="com.kencana.lms.model.MarcBatchUploadItem">
+		<field name="marcBatchUploadItemId" type="long" />
+		<field name="marcBatchUploadId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="createdBy" type="long" />
+		<field name="createdDate" type="Date" />
+		<field name="processed" type="boolean" />
+		<field name="importDate" type="Date" />
+		<field name="importByUserId" type="long" />
+		<field name="marcContent" type="String" />
+		<field name="fileName" type="String" />
+		<field name="fileEntryId" type="long" />
+	</model>
+	<model name="com.kencana.lms.model.MarcSubfield">
+		<field name="MarcSubfieldId" type="long" />
+		<field name="tag" type="String" />
+		<field name="tagType" type="String" />
+		<field name="subfield" type="String" />
+		<field name="description" type="String" />
+		<field name="repetable" type="boolean" />
+		<field name="mandatory" type="boolean" />
+		<field name="authorisedValue" type="String" />
+		<field name="authTypeCode" type="String" />
+		<field name="isURL" type="boolean" />
+		<field name="helpText" type="String" />
+	</model>
+	<model name="com.kencana.lms.model.MarcTag">
+		<field name="tagId" type="long" />
+		<field name="tag" type="String" />
+		<field name="description" type="String" />
+		<field name="helpText" type="String" />
+		<field name="repetable" type="boolean" />
+		<field name="defaultValue" type="String" />
+		<field name="indicator1" type="boolean" />
+		<field name="indicator2" type="boolean" />
+		<field name="tagType" type="String" />
+	</model>
+	<model name="com.kencana.lms.model.Patron">
+		<field name="patronId" type="long" />
+		<field name="cardNumber" type="String" />
+		<field name="userId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="libraryId" type="long" />
+		<field name="expiryDate" type="Date">
+			<hint name="show-time">false</hint>
+		</field>
+		<field name="patronCategoryId" type="long" />
+		<field name="patronStatusId" type="long" />
+		<field name="patronNote" type="String">
+			<hint-collection name="TEXTAREA" />
+		</field>
+	</model>
+	<model name="com.kencana.lms.model.PatronCategory">
+		<field name="patronCategoryId" type="long" />
+		<field name="patronCategoryName" type="String" />
+		<field name="notes" type="String">
+			<hint-collection name="TEXTAREA" />
+		</field>
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+	</model>
+	<model name="com.kencana.lms.model.PatronStatus">
+		<field name="patronStatusId" type="long" />
+		<field name="patronStatusName" type="String" />
+		<field name="noLogin" type="boolean" />
+		<field name="noCheckout" type="boolean" />
+		<field name="noReserve" type="boolean" />
+		<field name="noRenew" type="boolean" />
+		<field name="color" type="int" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+	</model>
+	<model name="com.kencana.lms.model.ReasonCode">
+		<field name="reasonCodeId" type="long" />
+		<field name="reasonCodeName" type="String">
+			<validator name="required" />
+		</field>
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+	</model>
+	<model name="com.kencana.lms.model.Vendor">
+		<field name="vendorId" type="long" />
+		<field name="vendorCode" type="String" />
+		<field name="vendorName" type="String" />
+		<field name="email" type="String">
+			<validator name="email" />
+		</field>
+		<field name="url" type="String">
+			<hint-collection name="URL" />
+		</field>
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="address1" type="String" />
+		<field name="address2" type="String" />
+		<field name="address3" type="String" />
+		<field name="city" type="String" />
+		<field name="zipcode" type="String" />
+		<field name="contactPerson" type="String" />
+		<field name="phone" type="String" />
+		<field name="fax" type="String" />
+		<field name="isPublisher" type="boolean" />
+		<field name="isBinder" type="boolean" />
+		<field name="isActive" type="boolean" />
+		<field name="rating" type="String" />
+		<field name="bankName" type="String" />
+		<field name="bankAccount" type="String" />
+		<field name="lastOrderDate" type="Date" />
+		<field name="note" type="String">
+			<hint-collection name="TEXTAREA" />
+		</field>
+	</model>
+</model-hints>
